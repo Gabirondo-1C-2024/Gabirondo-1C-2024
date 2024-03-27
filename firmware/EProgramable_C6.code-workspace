@@ -15,6 +15,12 @@
         {
             "path": "./projects/x_template"
         },
+        {
+            "path": "projects/ejer3"
+        },
+        {
+            "path": "projects/Ejercicio4Guia1"
+        }
     ],
     "settings": {
         "idf.portWin": "COM14",
