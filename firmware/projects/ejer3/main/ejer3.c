@@ -1,25 +1,17 @@
 /*! @mainpage Template
  *
  * @section genDesc General Description
- *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
- *
- * @section hardConn Hardware Connection
- *
- * |    Peripheral  |   ESP32   	|
- * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * 
+ *Este codigo hace una función que recibe un puntero a una estructura LED. La funcion enciende, apaga y hace titilar (con cierta frecuencia) un led 1, 2 o 3.
  *
  *
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 05/04/2024 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Valentina Gabirondo (valentina.gabirondo@ingenineria.uner.edu.ar)
  *
  */
 
@@ -33,23 +25,40 @@
 #include "switch.h"
 
 /*==================[macros and definitions]=================================*/
-
+/** @def ON
+ * @brief Enciende el led
+*/
 #define ON 1
+/** @def OFF
+ * @brief Apaga el led
+*/
 #define OFF 0
+/** @def TOGGLE
+ * @brief Hace itilar el led
+*/
 #define TOGGLE 2
+/** @def CONFIG_BLINK_PERIOD
+ * @brief Selecciona un periodo, para hacer titilar el led a cierta frecuencia.
+*/
 #define CONFIG_BLINK_PERIOD 100
 /*==================[internal data definition]===============================*/
-
+/** @struct my_leds
+ * @brief Estructura de leds que que me define un led.
+ * 
+*/
 struct leds
 {
-      uint8_t mode;       //ON, OFF, TOGGLE
+    uint8_t mode;       //ON, OFF, TOGGLE
 	uint8_t n_led;        //indica el número de led a controlar
 	uint8_t n_ciclos;   //indica la cantidad de ciclos de ncendido/apagado
 	uint16_t periodo;    //indica el tiempo de cada ciclo
 } my_leds;
 
 /*==================[internal functions declaration]=========================*/
-
+/** @fn void controlLed(struct leds *leds_ptr)
+ * @brief Funcion que controla cada Led prendiendo, apagando y modificando el estado entre prendido y apagado.   
+ * @param leds_ptr puntero a un struct leds
+*/
 void controlLed(struct leds *leds_ptr){
 
 		switch (leds_ptr->mode)
