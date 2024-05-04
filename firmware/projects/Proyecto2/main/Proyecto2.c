@@ -1,10 +1,14 @@
-/*! @mainpage Template
+/*! @mainpage Proyecto 2 
  *
  * @section genDesc General Description
  *
- * This section describes how the program works.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * Lo que hace este proyecto es mostrar distancia medida utilizando los leds de la siguiente manera:
+ * Si la distancia es menor a 10 cm, apagar todos los LEDs.
+ * Si la distancia está entre 10 y 20 cm, encender el LED_1.
+ * Si la distancia está entre 20 y 30 cm, encender el LED_2 y LED_1.
+ * Si la distancia es mayor a 30 cm, encender el LED_3, LED_2 y LED_1.
+ * Utilizando un display LCD para mostrar la ditancia medida.
+ * Tambien mediante teclas puede detener la medicion y congelar una ditancia.
  *
  * @section hardConn Hardware Connection
  *
@@ -17,9 +21,9 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 03/05/2023 | Document creation		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Gabirondo Valentina (valentina.gabirondo@ingenieria.uner.edu.ar)
  *
  */
 
@@ -33,76 +37,151 @@
 #include <stdbool.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "lcditse0803.h"
+#include "timer_mcu.h"
+
 /*==================[macros and definitions]=================================*/
-#define ON 1
-#define OFF 0
-#define CONFIG_BLINK_PERIOD 100
+
+
 #define ECHO GPIO_3
 #define TRIGGER GPIO_2
+#define TIME_PERIOD 1000000
 
-#define CONFIG_BLINK_PERIOD_LED_1 1000
-#define CONFIG_BLINK_PERIOD_LED_2 1500
-#define CONFIG_BLINK_PERIOD_LED_3 500
+
 /*==================[internal data definition]===============================*/
-TaskHandle_t led1_task_handle = NULL;
-TaskHandle_t led2_task_handle = NULL;
-TaskHandle_t led3_task_handle = NULL;
 
-void modificarLed(uint16_t distancia){
-	if(distancia<10){
+bool medir = true;
+bool hold = true;
+
+/*==================[internal functions declaration]=========================*/
+/** @fn void modificarLed(uint16_t distancia)
+ * @brief Esta funcion modifica los leds segun que ditancia este midiendo el sensor   
+ * @param distancia varible en donde se guarga la ditancia medida
+*/
+void modificarLed(uint16_t distancia)
+{
+	if (distancia < 10)
+	{
 		LedOff(LED_1);
 		LedOff(LED_2);
 		LedOff(LED_3);
 	}
-	else if (distancia>10 && distancia<20)
+	else if (distancia > 10 && distancia < 20)
 	{
 		LedOn(LED_1);
 		LedOff(LED_2);
 		LedOff(LED_3);
 	}
-	else if (distancia>20 && distancia<30)
+	else if (distancia > 20 && distancia < 30)
 	{
 		LedOn(LED_1);
 		LedOn(LED_2);
 		LedOff(LED_3);
 	}
-	else if (distancia>30)
+	else if (distancia > 30)
 	{
 		LedOn(LED_1);
 		LedOn(LED_2);
 		LedOn(LED_3);
 	}
 }
-/*==================[internal functions declaration]=========================*/
-
 /*==================[external functions definition]==========================*/
+/** @fn void Led1Task(void *pvParameter)
+ * @brief Funcion que tiene una tarea que es medir la ditancia y controlar el LCD y los led, 
+ * haciendo que se congele la medida y mida o no. 
+*/
 void Led1Task(void *pvParameter)
 {
 	uint16_t distancia;
 
 	while (true)
 	{
-		distancia = HcSr04ReadDistanceInCentimeters();
-		
-		modificarLed(distancia);
+		ulTaskNotifyTake(pdTRUE, portMAX_DELAY);  /* La tarea espera en este punto hasta recibir una notificación */
+		if (medir)
+		{
+			distancia = HcSr04ReadDistanceInCentimeters();
+			modificarLed(distancia);
+			if (!hold)
+			{
+				LcdItsE0803Write(distancia);
+			}
+		}
+		else
+		{
+			LcdItsE0803Off();
+			LedsOffAll();
+		}
 
-		//printf("La distancia: %d \n", distancia);
-		/* 	LedOn(LED_1);
-			vTaskDelay(CONFIG_BLINK_PERIOD_LED_1 / portTICK_PERIOD_MS);
-			printf("LED_1 OFF\n");
-			LedOff(LED_1);*/
-		vTaskDelay(CONFIG_BLINK_PERIOD_LED_1 / portTICK_PERIOD_MS);
+		//vTaskDelay(CONFIG_BLINK_PERIOD_LED_1 / portTICK_PERIOD_MS);
 	}
 }
+/** @fn void read_switch1(void)
+ * @brief Funcion que utilizo para darle un valor a la variable medir que luego uso para medir o no 
+ * (Prendido/apagado) 
+*/
+void read_switch1(void){
+	medir = !medir;
+}
+/** @fn void read_switch2(void)
+ * @brief Funcion para darle un valor a la variable hold que utilizo para congeler 
+ * la pantalla cuando hold es true
+*/
+void read_switch2(void){
+	hold = !hold;
+}
+/*void on_off_medicion2Task(void *pvParameter)
+{
+	//uint8_t tecla;
+	while (true)
+	{
+		 ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
+		//tecla = SwitchesRead();
+		if (ACTUAL_SWITCH == SWITCH_1)
+		{
+			medir = !medir;
+		}
+		else if (ACTUAL_SWITCH == SWITCH_2)
+		{
+			hold = !hold;
+		}
+	}
+}*/
+
+TaskHandle_t task_handle_medir = NULL;
+//TaskHandle_t task_handle_OnOff_medir = NULL;
+
+/** @fn void funcTimer(void* param)
+ * @brief Se relacion con el timer A, envia la notificacion para la interrupcion
+*/
+void funcTimer(void* param){
+    vTaskNotifyGiveFromISR(task_handle_medir, pdFALSE);
+    //vTaskNotifyGiveFromISR(task_handle_OnOff_medir, pdFALSE); 
+}
+
 
 void app_main(void)
 {
 
+	//inicialización de timers
+    timer_config_t timer_global = {
+        .timer = TIMER_A,
+        .period = TIME_PERIOD,
+        .func_p = funcTimer,
+        .param_p = NULL
+    };
+
+	TimerInit(&timer_global);
 	HcSr04Init(ECHO, TRIGGER);
+	LcdItsE0803Init();
 	LedsInit();
-	xTaskCreate(&Led1Task, "medir y prender y apagar led", 2048, NULL, 5, &led1_task_handle);
-	// xTaskCreate(&Led2Task, "prender y apagar con teclas y mostrar por pantalla", 512, NULL, 5, &led2_task_handle);
-	// xTaskCreate(&Led3Task, "", 512, NULL, 5, &led3_task_handle);
+	SwitchesInit();
+
+	SwitchActivInt(SWITCH_1, &read_switch1, NULL); //on_off
+    SwitchActivInt(SWITCH_2, &read_switch2, NULL); //hold
+
+	xTaskCreate(&Led1Task, "medir, prender y apagar led y mostrar", 2048, NULL, 5, &task_handle_medir);
+	//xTaskCreate(&on_off_medicion2Task, "prender y apagar con teclas", 512, NULL, 5, NULL);
 	
+	TimerStart(timer_global.timer);
 }
 /*==================[end of file]============================================*/
