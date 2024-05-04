@@ -1,0 +1,6 @@
+Con la imagen del osciloscopio de la medicion del pin ECHO puedo corroborar la distanca que muestra el diplay.
+Distancia = (500us * velocidad de la luz)/2.
+En la imagen donde SDS00003 son 7*500us, esto me da una ditancia de 60cm y en el diplay marcaba 41cm.
+En la imagen donde SDS00002 son 4*500us, esto me da una ditancia de 34cm y en el diplay marcaba 21cm.
+
+
