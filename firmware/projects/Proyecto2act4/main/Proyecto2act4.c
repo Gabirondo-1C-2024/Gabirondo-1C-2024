@@ -36,13 +36,13 @@
 #include "uart_mcu.h"
 #include "analog_io_mcu.h"
 /*==================[macros and definitions]=================================*/
-#define TIME_PERIOD 2000
+#define TIME_PERIOD 2000 //micro
 #define TIME_PERIOD2 4000
 uint8_t indice = 0;
 /*==================[internal data definition]===============================*/
 #define BUFFER_SIZE 231
 /*==================[internal data definition]===============================*/
-TaskHandle_t main_task_handle = NULL;
+//TaskHandle_t main_task_handle = NULL;
 const char ecg[BUFFER_SIZE] = {
     76, 77, 78, 77, 79, 86, 81, 76, 84, 93, 85, 80,
     89, 95, 89, 85, 93, 98, 94, 88, 98, 105, 96, 91,
@@ -68,10 +68,15 @@ TaskFunction_t task_handle2 =NULL;
 /** @fn void funcTimer(void* param)
  * @brief Se relacion con el timer A y B, envia la notificacion para la interrupcion  
 */
-void funcTimer(void* param){
+void funcTimer1(void* param){
     vTaskNotifyGiveFromISR(task_handle1, pdFALSE);
-    vTaskNotifyGiveFromISR(task_handle2, pdFALSE);
+    //vTaskNotifyGiveFromISR(task_handle2, pdFALSE);
     //vTaskNotifyGiveFromISR(task_handle_OnOff_medir, pdFALSE); 
+}
+void funcTimer2(void* param){
+
+    vTaskNotifyGiveFromISR(task_handle2, pdFALSE);
+
 }
 /** @fn static void tarea_leer (void* pvParameter)
  * @brief Esta funcion transforma una señal analogica a digital y la envia por puerto serie 
@@ -113,30 +118,30 @@ void app_main(void){
 
     };
 
-        analog_input_config_t analogInput2 = {
-        .input = CH0,
-        .mode = ADC_SINGLE,
+    //     analog_input_config_t analogInput2 = {
+    //     .input = CH0,
+    //     .mode = ADC_SINGLE,
 
-    };
+    // };
     
     	//inicialización de timers
     timer_config_t timer_1 = {
         .timer = TIMER_A,
         .period = TIME_PERIOD,
-        .func_p = funcTimer,
+        .func_p = funcTimer1,
         .param_p = NULL
     };
 
         timer_config_t timer_2 = {
         .timer = TIMER_B,
-        .period = TIME_PERIOD,
-        .func_p = funcTimer,
+        .period = TIME_PERIOD2,
+        .func_p = funcTimer2,
         .param_p = NULL
     };
 
     serial_config_t serial_global = {
 		.port = UART_PC,
-		.baud_rate = 115200,
+		.baud_rate = 115200,//unidad de transmision de datos, vel de l a se;al
 		.func_p = NULL,
 		.param_p = NULL
     };

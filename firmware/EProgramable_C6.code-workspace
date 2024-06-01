@@ -32,6 +32,9 @@
         },
         {
             "path": "projects/ProyectoIntegrador"
+        },
+        {
+            "path": "projects/Parcial7-6-22"
         }
     ],
     "settings": {
@@ -86,7 +89,9 @@
             "ili9341.h": "c",
             "soc_caps.h": "c",
             "mpu6050.h": "c",
-            "i2c_mcu.h": "c"
+            "i2c_mcu.h": "c",
+            "nvs_flash.h": "c",
+            "compare": "c"
         },
     },
     "tasks": {

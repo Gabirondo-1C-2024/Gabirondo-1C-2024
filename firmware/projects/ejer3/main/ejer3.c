@@ -94,6 +94,11 @@ void controlLed(struct leds *leds_ptr){
 				LedToggle(LED_2);}
 				else if(leds_ptr->n_led == LED_3){
 				LedToggle(LED_3);}
+
+				//Alternará el estado del LED_1 un total de 5 veces (n_ciclos = 5).
+				//Entre cada alternancia, esperará 10 ciclos (periodo = 10) de CONFIG_BLINK_PERIOD, es decir, 
+				//10 * 100 ms = 1000 ms (1 segundo).
+				
 				for(int j=0;j<leds_ptr->periodo;j++){
 				vTaskDelay(CONFIG_BLINK_PERIOD/portTICK_PERIOD_MS);
 			}

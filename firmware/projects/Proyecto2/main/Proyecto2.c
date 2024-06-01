@@ -45,7 +45,7 @@
 
 #define ECHO GPIO_3
 #define TRIGGER GPIO_2
-#define TIME_PERIOD 1000000
+#define TIME_PERIOD 1000000 //esta en micro segundos
 
 
 /*==================[internal data definition]===============================*/
