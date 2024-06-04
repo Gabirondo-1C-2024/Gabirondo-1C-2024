@@ -42,16 +42,18 @@ bool isDigit(char c){
 /*==================[external functions definition]==========================*/
 void BuzzerInit(gpio_t pin){
     PWMInit(PWM_BUZZER, pin, NOTE_C4);
-    PWMSetDutyCycle(PWM_BUZZER, PWM_DC);
-    PWMOff(PWM_BUZZER);
+    PWMSetDutyCycle(PWM_BUZZER, 0);
+    //PWMOff(PWM_BUZZER);
 }
 
 void BuzzerOn(void){
-    PWMOn(PWM_BUZZER);
+    //PWMOn(PWM_BUZZER);
+    PWMSetDutyCycle(PWM_BUZZER, 50);
 }
 
 void BuzzerOff(void){
-    PWMOff(PWM_BUZZER);
+    //PWMOff(PWM_BUZZER);
+    PWMSetDutyCycle(PWM_BUZZER, 0);
 }
 
 void BuzzerSetFrec(uint16_t freq){

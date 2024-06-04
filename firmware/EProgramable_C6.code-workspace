@@ -91,7 +91,8 @@
             "mpu6050.h": "c",
             "i2c_mcu.h": "c",
             "nvs_flash.h": "c",
-            "compare": "c"
+            "compare": "c",
+            "ledc.h": "c"
         },
     },
     "tasks": {
