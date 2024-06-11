@@ -1,9 +1,22 @@
 /*! @mainpage Parcial
  *
- * \section genDesc General Description
+ * \section 
  *
- * This example makes LED_1 and LED_2 blink at different rates, using FreeRTOS tasks and timer interrupts.
+ * En este proyecto se realiza el control a una planta dependido del ph se enciende las bombas de 
+ * ph acido o de basico y dependiendo la humedad se prende o apaga la bomba de agua. Se informa por UART si las bombas
+ * estan encendidas, el ph de la planata y si la humedad es correcta o incorrecta.
  *
+ *  @section hardConn Hardware Connection
+ *
+ * |    Peripheral  |   ESP32   	|
+ * |:--------------:|:--------------|
+ * | 	BOMBA_ACIDA	 | 	GPIO_19		|
+ * | 	HUMEDAD	 	| 	GPIO_20		|
+ * | 	BOMBA_AGUA	 | 	GPIO_21		|
+ * | 	BOMBA_BASICA| 	GPIO_22		|
+ * | 	SENSOR DE pH| 	 CH1		|
+ *
+ * 
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
@@ -35,10 +48,12 @@ TaskHandle_t control_task_handle = NULL;
 TaskHandle_t mostrar_task_handle = NULL;
 float ph;
 
-bool medir = true;
-bool detener = true;
-bool pHA = true;
-bool pHB = true;
+bool medir = true;   // bandera para medir
+bool detener = true; // bandera para detener
+bool pHA = true;     // bandera para saber si esta encendida la bomba
+bool pHB = true;     // bandera para saber si esta encendida la bomba
+
+// defino los gpio a usar
 
 #define BOMBA_BASICA GPIO_22
 #define BOMBA_ACIDA GPIO_19
@@ -60,18 +75,26 @@ void FuncTimerB(void *param)
 {
     vTaskNotifyGiveFromISR(mostrar_task_handle, pdFALSE); /* Envía una notificación a la tarea asociada al LED_2 */
 }
-
+/** @fn void read_switch1(void)
+ * @brief Funcion que utilizo para darle un valor a la variable medir que luego uso para medir o no
+ * (Prendido/apagado)
+ */
 void read_switch1(void)
 {
     medir = !medir;
 }
+/** @fn void read_switch2(void)
+ * @brief Funcion para darle un valor a la variable detener que utilizo para apagar el sistema
+ *
+ */
 void read_switch2(void)
 {
     detener = !detener;
 }
 
-/**
- * @brief Tarea encargada de blinkear el LED_1
+/** @fn static void control(void *pvParameter)
+ * @brief Tarea encargada de controlar el estado de la planata, que el ph este en el rango correcto y la humedad tambien.
+ * Esto lo realizo prendiendo y apagando los Gpio de las respectivas bombas.
  */
 static void control(void *pvParameter)
 {
@@ -84,25 +107,35 @@ static void control(void *pvParameter)
         {
 
             AnalogInputReadSingle(CH1, &valorVolt);
-            ph = (14 * valorVolt) / 3;
+            ph = (14.0 * valorVolt) / 3000.0;
+
             if (ph < 6.0)
             {
                 GPIOOn(BOMBA_BASICA);
                 pHB = true;
             }
             else
+            {
+                GPIOOff(BOMBA_BASICA);
                 pHB = false;
+            }
             if (ph > 6.7)
             {
                 GPIOOn(BOMBA_ACIDA);
                 pHA = true;
             }
             else
+            {
+                GPIOOff(BOMBA_ACIDA);
                 pHA = false;
-
+            }
             if ((GPIORead(HUMEDAD)) == true)
             {
                 GPIOOn(BOMBA_AGUA);
+            }
+            else
+            {
+                GPIOOff(BOMBA_AGUA);
             }
         }
         else if (medir == false && detener == true)
@@ -114,8 +147,9 @@ static void control(void *pvParameter)
     }
 }
 
-/**
- * @brief Tarea encargada de blinkear el LED_2
+
+/** @fn static mostrar(void* pvParameter)
+ * @brief Tarea encargada de mostrar los diferentes mensajes por UART cada 5 segundos
  */
 static void mostrar(void *pvParameter)
 {
@@ -196,8 +230,8 @@ void app_main(void)
         .param_p = NULL};
     TimerInit(&timer_2);
     /* Creación de tareas */
-    xTaskCreate(&control, "controla el estado de la planta", 512, NULL, 5, &control_task_handle);
-    xTaskCreate(&mostrar, "muestra datos", 512, NULL, 5, &mostrar_task_handle);
+    xTaskCreate(&control, "controla el estado de la planta", 2048, NULL, 5, &control_task_handle);
+    xTaskCreate(&mostrar, "muestra datos", 2048, NULL, 5, &mostrar_task_handle);
     /* Inicialización del conteo de timers */
     TimerStart(timer_1.timer);
     TimerStart(timer_2.timer);
