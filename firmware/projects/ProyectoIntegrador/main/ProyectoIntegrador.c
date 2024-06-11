@@ -78,12 +78,10 @@ void funcTimer(void *param)
 // Esta tarea lee el valor de gas
 static void tarea_leer_gas(void *pvParameter)
 {
-    // MQInit(GPIO_1);
-    // RO_ = MQCalibration();
-    uint16_t vect[10];
+    uint16_t vect[5];
     uint32_t acum = 0;
-
     int i = 0;
+
     while (1)
     {
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY); /* La tarea espera en este punto hasta recibir una notificación */
@@ -92,7 +90,7 @@ static void tarea_leer_gas(void *pvParameter)
             float read = MQRead();
             valorGasLPG = MQGetPercentage(read / RO_);
             valor_convertido = (uint16_t)(valorGasLPG * 1000000);
-            if (i < 10)
+            if (i < 5)
             {
                 vect[i] = valor_convertido;
                 acum += vect[i];
@@ -100,7 +98,7 @@ static void tarea_leer_gas(void *pvParameter)
             }
             else
             {
-                promedio = acum / 10;
+                promedio = acum / 5;
                 acum = 0;
                 i = 0;
             }
@@ -115,23 +113,19 @@ void Alarma_ON(void *pvParameter)
 {
 
     const uint16_t umbral = 30000;
-    const uint16_t freq = 500;
-    const uint16_t duration = 200;
+    // const uint16_t freq = 500;
+    // const uint16_t duration = 200;
 
     while (1)
     {
-        // ulTaskNotifyTake(pdTRUE, portMAX_DELAY);
         printf("%d\n", promedio);
         if (promedio > umbral)
         {
             BuzzerOn();
             LedOn(LED_1);
-
-            // BuzzerPlayTone(freq, duration);
         }
         else
         {
-
             BuzzerOff();
             LedOff(LED_1);
         }
@@ -170,10 +164,9 @@ void read_data(uint8_t *data, uint8_t length)
     {
 
         PWMSetDutyCycle(PWM_0, 0);
-
         PWMSetDutyCycle(PWM_1, 0);
+        
         PWMOn(PWM_1);
-
         PWMOn(PWM_0);
 
         GPIOOff(AIB);
