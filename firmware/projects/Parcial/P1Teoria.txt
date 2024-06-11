@@ -1,8 +1,12 @@
 1.Indique a qué protocolo de comunicación síncrono refiere la figura detallando las principales características del mismo. 
 
-La figra refiere al protocolo de comunicacion de I2C sincrono, half duplex esto sigmifica que puede mandar y recibir datos pero no de manera simultanea.
+La figra refiere al protocolo de comunicacion de I2C sincrono en serie, half duplex esto sigmifica que puede mandar y recibir datos pero no de manera simultanea.
+Las lineas son bidireccionales.
 Tiene dos lineas una SCL de clock y otra SDA en donde manda y recibe datos.
 Se lee desde el bit mas significativo al menos significativo.
+Permite conectar varios dipositivos al mismo cable. 
+Su velocidad comun es entre 100kHz y 400kHz.
+Su velocidad speed es de 1MHz hasta 5MHz.
 
 2.Indique a qué tipo de conversor refiere la figura y qué sucede si se omite el capacitor C.
 
