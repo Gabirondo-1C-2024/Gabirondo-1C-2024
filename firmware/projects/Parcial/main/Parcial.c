@@ -28,8 +28,8 @@
 #include "uart_mcu.h"
 
 /*==================[macros and definitions]=================================*/
-#define T1 3000000 //3 SEGUNDOS
-#define T2 5000000 //5 SEGUNDOS
+#define T1 3000000 // 3 SEGUNDOS
+#define T2 5000000 // 5 SEGUNDOS
 /*==================[internal data definition]===============================*/
 TaskHandle_t control_task_handle = NULL;
 TaskHandle_t mostrar_task_handle = NULL;
@@ -37,8 +37,8 @@ float ph;
 
 bool medir = true;
 bool detener = true;
-bool pHA =true;
-bool pHB =true;
+bool pHA = true;
+bool pHB = true;
 
 #define BOMBA_BASICA GPIO_22
 #define BOMBA_ACIDA GPIO_19
@@ -82,26 +82,28 @@ static void control(void *pvParameter)
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY); /* La tarea espera en este punto hasta recibir una notificación */
         if (medir == true && detener == false)
         {
-            
+
             AnalogInputReadSingle(CH1, &valorVolt);
             ph = (14 * valorVolt) / 3;
             if (ph < 6.0)
             {
                 GPIOOn(BOMBA_BASICA);
-                pHB=true;
+                pHB = true;
             }
-            else pHB=false;
+            else
+                pHB = false;
             if (ph > 6.7)
             {
                 GPIOOn(BOMBA_ACIDA);
-                pHA=true;
+                pHA = true;
             }
-            else pHA = false;
-            
-            if ((GPIORead(HUMEDAD))==true){
+            else
+                pHA = false;
+
+            if ((GPIORead(HUMEDAD)) == true)
+            {
                 GPIOOn(BOMBA_AGUA);
             }
-
         }
         else if (medir == false && detener == true)
         {
@@ -120,26 +122,38 @@ static void mostrar(void *pvParameter)
     while (true)
     {
         ulTaskNotifyTake(pdTRUE, portMAX_DELAY); /* La tarea espera en este punto hasta recibir una notificación */
-        if(medir == true && detener == false){
+        if (medir == true && detener == false)
+        {
 
-            if(HUMEDAD==true){
+            if (HUMEDAD == true)
+            {
 
-            UartSendString(UART_PC, (char*)"El pH: ");
-            UartSendString(UART_PC, (char*) UartItoa(ph, 10));
-			UartSendString(UART_PC, (char*)"humedad es incorrecta");
-            UartSendString(UART_PC, (char*) "\r\n");
-            UartSendString(UART_PC, (char*)"Bomba de agua encendida");
-            UartSendString(UART_PC, (char*) "\r\n");
+                UartSendString(UART_PC, (char *)"El pH: ");
+                UartSendString(UART_PC, (char *)UartItoa(ph, 10));
+                UartSendString(UART_PC, (char *)",humedad incorrecta");
+                UartSendString(UART_PC, (char *)"\r\n");
+                UartSendString(UART_PC, (char *)"Bomba de agua encendida");
+                UartSendString(UART_PC, (char *)"\r\n");
             }
-            else if(HUMEDAD==false){
-            UartSendString(UART_PC, (char*)"El pH: ");
-            UartSendString(UART_PC, (char*) UartItoa(ph, 10));
-			UartSendString(UART_PC, (char*)"humedad es correcta");
-            UartSendString(UART_PC, (char*) "\r\n");
+            else if (HUMEDAD == false)
+            {
+                UartSendString(UART_PC, (char *)"El pH: ");
+                UartSendString(UART_PC, (char *)UartItoa(ph, 10));
+                UartSendString(UART_PC, (char *)", humedad correcta");
+                UartSendString(UART_PC, (char *)"\r\n");
             }
-            else if()
-
-    }}
+            if (pHA == true)
+            {
+                UartSendString(UART_PC, (char *)"Bomba de pH acido encendida");
+                UartSendString(UART_PC, (char *)"\r\n");
+            }
+            else if (pHB == true)
+            {
+                UartSendString(UART_PC, (char *)"Bomba de pH basico encendida");
+                UartSendString(UART_PC, (char *)"\r\n");
+            }
+        }
+    }
 }
 
 /*==================[external functions definition]==========================*/
@@ -159,6 +173,14 @@ void app_main(void)
         .mode = ADC_SINGLE,
 
     };
+
+    serial_config_t serial_global = {
+        .port = UART_PC,
+        .baud_rate = 115200, // unidad de transmision de datos, vel de l a se;al
+        .func_p = NULL,
+        .param_p = NULL};
+
+    UartInit(&serial_global);
 
     /* Inicialización de timers */
     timer_config_t timer_1 = {
