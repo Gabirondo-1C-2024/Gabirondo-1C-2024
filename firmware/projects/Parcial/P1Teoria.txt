@@ -2,9 +2,10 @@
 
 La figra refiere al protocolo de comunicacion de I2C sincrono, half duplex esto sigmifica que puede mandar y recibir datos pero no de manera simultanea.
 Tiene dos lineas una SCL de clock y otra SDA en donde manda y recibe datos.
+Se lee desde el bit mas significativo al menos significativo.
 
 2.Indique a qué tipo de conversor refiere la figura y qué sucede si se omite el capacitor C.
 
-Es un conversor analogico digital. El capacitor C de la etapa de sampling and hold en donde la llave se abre y el capacitor queda guargando el valor de la señal analogica. Si sacamos este capacitor perderiamos datos de la señal ya que la señal analogica podria variar miestras se esta conviertiendo el valor digital, terndriamos mucho error. 
+Es un conversor analogico digital de aproximaciones sucesivas. El capacitor C de la etapa de sampling and hold en donde la llave se abre y el capacitor queda guargando el valor de la señal analogica. Si sacamos este capacitor perderiamos datos de la señal ya que la señal analogica podria variar miestras se esta conviertiendo el valor digital, terndriamos mucho error. 
 
 
