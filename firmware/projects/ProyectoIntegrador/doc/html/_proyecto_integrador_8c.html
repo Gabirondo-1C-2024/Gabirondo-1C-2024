@@ -1,0 +1,650 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="es">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.10.0"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Proyecto integrador: Referencia del archivo C:/Repositorios/Gabirondo-1C-2024/firmware/projects/ProyectoIntegrador/main/ProyectoIntegrador.c</title>
+<link rel="icon" href="icon.ico" type="image/x-icon" />
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="clipboard.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+  $(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="fiuner.png"/></td>
+  <td id="projectalign">
+   <div id="projectname">Proyecto integrador<span id="projectnumber">&#160;1.0</span>
+   </div>
+  </td>
+    <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect"                onmouseover="return searchBox.OnSearchSelectShow()"                onmouseout="return searchBox.OnSearchSelectHide()">&#160;</span>
+          <input type="text" id="MSearchField" value="" placeholder="Buscar" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.svg" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generado por Doxygen 1.10.0 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(function(){initNavTree('_proyecto_integrador_8c.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Cargando...</div>
+<div class="SRStatus" id="Searching">Buscando...</div>
+<div class="SRStatus" id="NoMatches">Nada coincide</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#define-members">defines</a> &#124;
+<a href="#func-members">Funciones</a> &#124;
+<a href="#var-members">Variables</a>  </div>
+  <div class="headertitle"><div class="title">Referencia del archivo ProyectoIntegrador.c</div></div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;stdio.h&gt;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
+<code>#include &lt;stdint.h&gt;</code><br />
+<code>#include &lt;stdbool.h&gt;</code><br />
+<code>#include &quot;freertos/FreeRTOS.h&quot;</code><br />
+<code>#include &quot;freertos/task.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="led_8h_source.html">led.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="switch_8h_source.html">switch.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="buzzer_8h_source.html">buzzer.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="gpio__mcu_8h_source.html">gpio_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="timer__mcu_8h_source.html">timer_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="uart__mcu_8h_source.html">uart_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="analog__io__mcu_8h_source.html">analog_io_mcu.h</a>&quot;</code><br />
+<code>#include &quot;<a class="el" href="ble__mcu_8h_source.html">ble_mcu.h</a>&quot;</code><br />
+<code>#include &quot;MQ2sensor.h&quot;</code><br />
+<code>#include &quot;<a class="el" href="pwm__mcu_8h_source.html">pwm_mcu.h</a>&quot;</code><br />
+</div>
+<p><a href="_proyecto_integrador_8c_source.html">Ir al código fuente de este archivo.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="define-members" name="define-members"></a>
+defines</h2></td></tr>
+<tr class="memitem:a545fe1970c78a58ea3449a7206fc78f3" id="r_a545fe1970c78a58ea3449a7206fc78f3"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a545fe1970c78a58ea3449a7206fc78f3">TIME_PERIOD</a>&#160;&#160;&#160;500000</td></tr>
+<tr class="separator:a545fe1970c78a58ea3449a7206fc78f3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a145103118f6d9d1129aa4509cf214a13" id="r_a145103118f6d9d1129aa4509cf214a13"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a145103118f6d9d1129aa4509cf214a13">BUZZER</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a426d08ab85ab3aebbb53eed1a32dfb71">GPIO_3</a></td></tr>
+<tr class="memdesc:a145103118f6d9d1129aa4509cf214a13"><td class="mdescLeft">&#160;</td><td class="mdescRight">GPIO_3 lo utilizo para el buzzer .  <br /></td></tr>
+<tr class="separator:a145103118f6d9d1129aa4509cf214a13"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5cd214e3388ac9638a130ed594a731aa" id="r_a5cd214e3388ac9638a130ed594a731aa"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5cd214e3388ac9638a130ed594a731aa">AIA</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aca7c5f2acf755d61b35d05ea921c79eb">GPIO_22</a></td></tr>
+<tr class="separator:a5cd214e3388ac9638a130ed594a731aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aad0eee356a3d1a76b3afe1c9fe10581d" id="r_aad0eee356a3d1a76b3afe1c9fe10581d"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aad0eee356a3d1a76b3afe1c9fe10581d">AIB</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aa2918c94bcf473e7ff31138b6333f847">GPIO_19</a></td></tr>
+<tr class="separator:aad0eee356a3d1a76b3afe1c9fe10581d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4f8a54c717cea6abf03671be451d0677" id="r_a4f8a54c717cea6abf03671be451d0677"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4f8a54c717cea6abf03671be451d0677">BIB</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a32ff7e9a2f00d396ff2b2b62af571d7c">GPIO_21</a></td></tr>
+<tr class="separator:a4f8a54c717cea6abf03671be451d0677"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1bae28df888810803e46d24850da6d6" id="r_ad1bae28df888810803e46d24850da6d6"><td class="memItemLeft" align="right" valign="top">#define&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1bae28df888810803e46d24850da6d6">BIA</a>&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a></td></tr>
+<tr class="separator:ad1bae28df888810803e46d24850da6d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
+Funciones</h2></td></tr>
+<tr class="memitem:aa8b1af5782107e08e0f952dc88ca1040" id="r_aa8b1af5782107e08e0f952dc88ca1040"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa8b1af5782107e08e0f952dc88ca1040">funcTimer</a> (void *param)</td></tr>
+<tr class="memdesc:aa8b1af5782107e08e0f952dc88ca1040"><td class="mdescLeft">&#160;</td><td class="mdescRight">Función invocada en la interrupción del timer.  <br /></td></tr>
+<tr class="separator:aa8b1af5782107e08e0f952dc88ca1040"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:acdc645d98cdcd3e741efd9408ff43217" id="r_acdc645d98cdcd3e741efd9408ff43217"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#acdc645d98cdcd3e741efd9408ff43217">Alarma_ON</a> (void *pvParameter)</td></tr>
+<tr class="memdesc:acdc645d98cdcd3e741efd9408ff43217"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tarea encargada de encender una alarma cuando el valor del gas supera el umbral preestablecido cada 0.5 s usando delay.  <br /></td></tr>
+<tr class="separator:acdc645d98cdcd3e741efd9408ff43217"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a80fa93fc0ff7378d9fb68f8156fd6e78" id="r_a80fa93fc0ff7378d9fb68f8156fd6e78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a80fa93fc0ff7378d9fb68f8156fd6e78">read_data</a> (uint8_t *data)</td></tr>
+<tr class="memdesc:a80fa93fc0ff7378d9fb68f8156fd6e78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Funcion que utilizo para controlar los motores con PWM y GPIO.  <br /></td></tr>
+<tr class="separator:a80fa93fc0ff7378d9fb68f8156fd6e78"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a630544a7f0a2cc40d8a7fefab7e2fe70" id="r_a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a630544a7f0a2cc40d8a7fefab7e2fe70">app_main</a> (void)</td></tr>
+<tr class="separator:a630544a7f0a2cc40d8a7fefab7e2fe70"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:abb37380e6d584843a7c0f51ff1249867" id="r_abb37380e6d584843a7c0f51ff1249867"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abb37380e6d584843a7c0f51ff1249867">RO_</a> = 0</td></tr>
+<tr class="memdesc:abb37380e6d584843a7c0f51ff1249867"><td class="mdescLeft">&#160;</td><td class="mdescRight">R0_ resistencia R0 a aire en condiciones normales.  <br /></td></tr>
+<tr class="separator:abb37380e6d584843a7c0f51ff1249867"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1f2a605a098616ceac20dc28295538a1" id="r_a1f2a605a098616ceac20dc28295538a1"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1f2a605a098616ceac20dc28295538a1">valorGasLPG</a> = 0</td></tr>
+<tr class="memdesc:a1f2a605a098616ceac20dc28295538a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">valorGasLPG valor de gas butano medido.  <br /></td></tr>
+<tr class="separator:a1f2a605a098616ceac20dc28295538a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a9a16e4ca89b9281d994f3113b39965" id="r_a5a9a16e4ca89b9281d994f3113b39965"><td class="memItemLeft" align="right" valign="top">volatile uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a9a16e4ca89b9281d994f3113b39965">valor_convertido</a> = 0</td></tr>
+<tr class="memdesc:a5a9a16e4ca89b9281d994f3113b39965"><td class="mdescLeft">&#160;</td><td class="mdescRight">valorGasLPG valor de gas butano convertido a entero.  <br /></td></tr>
+<tr class="separator:a5a9a16e4ca89b9281d994f3113b39965"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:abc2356451b7c28511097f934a9acff4c" id="r_abc2356451b7c28511097f934a9acff4c"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#abc2356451b7c28511097f934a9acff4c">estadoMedicion</a> = true</td></tr>
+<tr class="memdesc:abc2356451b7c28511097f934a9acff4c"><td class="mdescLeft">&#160;</td><td class="mdescRight">estadoMedicion bandera condicion de medicion.  <br /></td></tr>
+<tr class="separator:abc2356451b7c28511097f934a9acff4c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a82fd6ddc7c2eb9eebca7b8888a653164" id="r_a82fd6ddc7c2eb9eebca7b8888a653164"><td class="memItemLeft" align="right" valign="top">uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82fd6ddc7c2eb9eebca7b8888a653164">promedio</a></td></tr>
+<tr class="memdesc:a82fd6ddc7c2eb9eebca7b8888a653164"><td class="mdescLeft">&#160;</td><td class="mdescRight">promedio es una variable uint16_t que guarda el promedio de 5 valores de gas.  <br /></td></tr>
+<tr class="separator:a82fd6ddc7c2eb9eebca7b8888a653164"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a985fe68f8c037b3b62fce46bfa6fd711" id="r_a985fe68f8c037b3b62fce46bfa6fd711"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a985fe68f8c037b3b62fce46bfa6fd711">adelante</a> [] = {255, 1, 1, 1, 2, 0, 1, 0}</td></tr>
+<tr class="memdesc:a985fe68f8c037b3b62fce46bfa6fd711"><td class="mdescLeft">&#160;</td><td class="mdescRight">adelante es una lista de comando "adelante" para la aplicacion Dabble  <br /></td></tr>
+<tr class="separator:a985fe68f8c037b3b62fce46bfa6fd711"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa71d444442de2847c0f36613167b23df" id="r_aa71d444442de2847c0f36613167b23df"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa71d444442de2847c0f36613167b23df">atras</a> [] = {255, 1, 1, 1, 2, 0, 2, 0}</td></tr>
+<tr class="memdesc:aa71d444442de2847c0f36613167b23df"><td class="mdescLeft">&#160;</td><td class="mdescRight">atras es una lista de comando "atras" para la aplicacion Dabble  <br /></td></tr>
+<tr class="separator:aa71d444442de2847c0f36613167b23df"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a87eea1f191ed5296a34f753085bb5dbe" id="r_a87eea1f191ed5296a34f753085bb5dbe"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a87eea1f191ed5296a34f753085bb5dbe">stop</a> [] = {255, 1, 1, 1, 2, 0, 0, 0}</td></tr>
+<tr class="memdesc:a87eea1f191ed5296a34f753085bb5dbe"><td class="mdescLeft">&#160;</td><td class="mdescRight">stop es una lista de comando "parar" para la aplicacion Dabble  <br /></td></tr>
+<tr class="separator:a87eea1f191ed5296a34f753085bb5dbe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad013d4bdc639d2db196054fea6f44468" id="r_ad013d4bdc639d2db196054fea6f44468"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad013d4bdc639d2db196054fea6f44468">derecha</a> [] = {255, 1, 1, 1, 2, 0, 8, 0}</td></tr>
+<tr class="memdesc:ad013d4bdc639d2db196054fea6f44468"><td class="mdescLeft">&#160;</td><td class="mdescRight">derecha es una lista de comando "doblar a la derecha" para la aplicacion Dabble  <br /></td></tr>
+<tr class="separator:ad013d4bdc639d2db196054fea6f44468"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a683768b7d9040b0e8294b2bd257a895a" id="r_a683768b7d9040b0e8294b2bd257a895a"><td class="memItemLeft" align="right" valign="top">char&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a683768b7d9040b0e8294b2bd257a895a">izquierda</a> [] = {255, 1, 1, 1, 2, 0, 4, 0}</td></tr>
+<tr class="memdesc:a683768b7d9040b0e8294b2bd257a895a"><td class="mdescLeft">&#160;</td><td class="mdescRight">izquierda es una lista de comando "doblar a la izquierda" para la aplicacion Dabble  <br /></td></tr>
+<tr class="separator:a683768b7d9040b0e8294b2bd257a895a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fcdb8ca24c526a411a722da9e119ec5" id="r_a1fcdb8ca24c526a411a722da9e119ec5"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1fcdb8ca24c526a411a722da9e119ec5">task_handle1</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="separator:a1fcdb8ca24c526a411a722da9e119ec5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2310c66f510ad4d0c05f78f4d3101f28" id="r_a2310c66f510ad4d0c05f78f4d3101f28"><td class="memItemLeft" align="right" valign="top">TaskHandle_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2310c66f510ad4d0c05f78f4d3101f28">task_handle2</a> = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td></tr>
+<tr class="separator:a2310c66f510ad4d0c05f78f4d3101f28"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Documentación de «define»</h2>
+<a id="a5cd214e3388ac9638a130ed594a731aa" name="a5cd214e3388ac9638a130ed594a731aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5cd214e3388ac9638a130ed594a731aa">&#9670;&#160;</a></span>AIA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AIA&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aca7c5f2acf755d61b35d05ea921c79eb">GPIO_22</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00054">54</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="aad0eee356a3d1a76b3afe1c9fe10581d" name="aad0eee356a3d1a76b3afe1c9fe10581d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aad0eee356a3d1a76b3afe1c9fe10581d">&#9670;&#160;</a></span>AIB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define AIB&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393aa2918c94bcf473e7ff31138b6333f847">GPIO_19</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00055">55</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a> y <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="ad1bae28df888810803e46d24850da6d6" name="ad1bae28df888810803e46d24850da6d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad1bae28df888810803e46d24850da6d6">&#9670;&#160;</a></span>BIA</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BIA&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a081be372da926e3ca6f612b267854e95">GPIO_20</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00057">57</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a> y <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="a4f8a54c717cea6abf03671be451d0677" name="a4f8a54c717cea6abf03671be451d0677"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4f8a54c717cea6abf03671be451d0677">&#9670;&#160;</a></span>BIB</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BIB&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a32ff7e9a2f00d396ff2b2b62af571d7c">GPIO_21</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00056">56</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a145103118f6d9d1129aa4509cf214a13" name="a145103118f6d9d1129aa4509cf214a13"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a145103118f6d9d1129aa4509cf214a13">&#9670;&#160;</a></span>BUZZER</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BUZZER&#160;&#160;&#160;<a class="el" href="group___g_i_o_p.html#ggaf65604147d0244c9b13cfdc865ad5393a426d08ab85ab3aebbb53eed1a32dfb71">GPIO_3</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>GPIO_3 lo utilizo para el buzzer . </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00052">52</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a545fe1970c78a58ea3449a7206fc78f3" name="a545fe1970c78a58ea3449a7206fc78f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a545fe1970c78a58ea3449a7206fc78f3">&#9670;&#160;</a></span>TIME_PERIOD</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define TIME_PERIOD&#160;&#160;&#160;500000</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00049">49</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de funciones</h2>
+<a id="acdc645d98cdcd3e741efd9408ff43217" name="acdc645d98cdcd3e741efd9408ff43217"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acdc645d98cdcd3e741efd9408ff43217">&#9670;&#160;</a></span>Alarma_ON()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">static void Alarma_ON </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>pvParameter</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Tarea encargada de encender una alarma cuando el valor del gas supera el umbral preestablecido cada 0.5 s usando delay. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00141">141</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="buzzer_8c_source.html#l00053">BuzzerOff()</a>, <a class="el" href="buzzer_8c_source.html#l00049">BuzzerOn()</a>, <a class="el" href="led_8h_source.html#l00034">LED_1</a>, <a class="el" href="led_8c_source.html#l00065">LedOff()</a>, <a class="el" href="led_8c_source.html#l00046">LedOn()</a> y <a class="el" href="_proyecto_integrador_8c_source.html#l00072">promedio</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a630544a7f0a2cc40d8a7fefab7e2fe70" name="a630544a7f0a2cc40d8a7fefab7e2fe70"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a630544a7f0a2cc40d8a7fefab7e2fe70">&#9670;&#160;</a></span>app_main()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void app_main </td>
+          <td>(</td>
+          <td class="paramtype">void</td>          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00233">233</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="_proyecto_integrador_8c_source.html#l00054">AIA</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00055">AIB</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00141">Alarma_ON()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00057">BIA</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00056">BIB</a>, <a class="el" href="ble__mcu_8c_source.html#l00452">BleInit()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00052">BUZZER</a>, <a class="el" href="buzzer_8c_source.html#l00043">BuzzerInit()</a>, <a class="el" href="buzzer_8c_source.html#l00057">BuzzerSetFrec()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00098">funcTimer()</a>, <a class="el" href="gpio__mcu_8h_source.html#l00053">GPIO_1</a>, <a class="el" href="gpio__mcu_8h_source.html#l00044">GPIO_OUTPUT</a>, <a class="el" href="gpio__mcu_8c_source.html#l00067">GPIOInit()</a>, <a class="el" href="led_8c_source.html#l00031">LedsInit()</a>, <a class="el" href="ili9341_8c_source.html#l00019">NULL</a>, <a class="el" href="pwm__mcu_8h_source.html#l00034">PWM_0</a>, <a class="el" href="pwm__mcu_8h_source.html#l00035">PWM_1</a>, <a class="el" href="pwm__mcu_8c_source.html#l00039">PWMInit()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00060">RO_</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00092">task_handle1</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00093">task_handle2</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00049">TIME_PERIOD</a>, <a class="el" href="timer__mcu_8h_source.html#l00040">timer_config_t::timer</a>, <a class="el" href="timer__mcu_8h_source.html#l00032">TIMER_A</a>, <a class="el" href="timer__mcu_8c_source.html#l00055">TimerInit()</a> y <a class="el" href="timer__mcu_8c_source.html#l00110">TimerStart()</a>.</p>
+
+</div>
+</div>
+<a id="aa8b1af5782107e08e0f952dc88ca1040" name="aa8b1af5782107e08e0f952dc88ca1040"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8b1af5782107e08e0f952dc88ca1040">&#9670;&#160;</a></span>funcTimer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void funcTimer </td>
+          <td>(</td>
+          <td class="paramtype">void *</td>          <td class="paramname"><span class="paramname"><em>param</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Función invocada en la interrupción del timer. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00098">98</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="_proyecto_integrador_8c_source.html#l00092">task_handle1</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a80fa93fc0ff7378d9fb68f8156fd6e78" name="a80fa93fc0ff7378d9fb68f8156fd6e78"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a80fa93fc0ff7378d9fb68f8156fd6e78">&#9670;&#160;</a></span>read_data()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void read_data </td>
+          <td>(</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>data</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Funcion que utilizo para controlar los motores con PWM y GPIO. </p>
+<dl class="params"><dt>Parámetros</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td>uint8_t variable que guarda los caracteres que le mando por bluetooth. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00170">170</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Hace referencia a <a class="el" href="_proyecto_integrador_8c_source.html#l00077">adelante</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00055">AIB</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00080">atras</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00057">BIA</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00086">derecha</a>, <a class="el" href="gpio__mcu_8c_source.html#l00086">GPIOOff()</a>, <a class="el" href="gpio__mcu_8c_source.html#l00081">GPIOOn()</a>, <a class="el" href="_proyecto_integrador_8c_source.html#l00089">izquierda</a>, <a class="el" href="pwm__mcu_8h_source.html#l00034">PWM_0</a>, <a class="el" href="pwm__mcu_8h_source.html#l00035">PWM_1</a>, <a class="el" href="pwm__mcu_8h_source.html#l00036">PWM_2</a>, <a class="el" href="pwm__mcu_8c_source.html#l00081">PWMOn()</a>, <a class="el" href="pwm__mcu_8c_source.html#l00115">PWMSetDutyCycle()</a> y <a class="el" href="_proyecto_integrador_8c_source.html#l00083">stop</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Documentación de variables</h2>
+<a id="a985fe68f8c037b3b62fce46bfa6fd711" name="a985fe68f8c037b3b62fce46bfa6fd711"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a985fe68f8c037b3b62fce46bfa6fd711">&#9670;&#160;</a></span>adelante</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char adelante[] = {255, 1, 1, 1, 2, 0, 1, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>adelante es una lista de comando "adelante" para la aplicacion Dabble </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00077">77</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="aa71d444442de2847c0f36613167b23df" name="aa71d444442de2847c0f36613167b23df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa71d444442de2847c0f36613167b23df">&#9670;&#160;</a></span>atras</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char atras[] = {255, 1, 1, 1, 2, 0, 2, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>atras es una lista de comando "atras" para la aplicacion Dabble </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00080">80</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="ad013d4bdc639d2db196054fea6f44468" name="ad013d4bdc639d2db196054fea6f44468"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad013d4bdc639d2db196054fea6f44468">&#9670;&#160;</a></span>derecha</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char derecha[] = {255, 1, 1, 1, 2, 0, 8, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>derecha es una lista de comando "doblar a la derecha" para la aplicacion Dabble </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00086">86</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="abc2356451b7c28511097f934a9acff4c" name="abc2356451b7c28511097f934a9acff4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc2356451b7c28511097f934a9acff4c">&#9670;&#160;</a></span>estadoMedicion</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool estadoMedicion = true</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>estadoMedicion bandera condicion de medicion. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00069">69</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+</div>
+</div>
+<a id="a683768b7d9040b0e8294b2bd257a895a" name="a683768b7d9040b0e8294b2bd257a895a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a683768b7d9040b0e8294b2bd257a895a">&#9670;&#160;</a></span>izquierda</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char izquierda[] = {255, 1, 1, 1, 2, 0, 4, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>izquierda es una lista de comando "doblar a la izquierda" para la aplicacion Dabble </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00089">89</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="a82fd6ddc7c2eb9eebca7b8888a653164" name="a82fd6ddc7c2eb9eebca7b8888a653164"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a82fd6ddc7c2eb9eebca7b8888a653164">&#9670;&#160;</a></span>promedio</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t promedio</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>promedio es una variable uint16_t que guarda el promedio de 5 valores de gas. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00072">72</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00141">Alarma_ON()</a>.</p>
+
+</div>
+</div>
+<a id="abb37380e6d584843a7c0f51ff1249867" name="abb37380e6d584843a7c0f51ff1249867"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abb37380e6d584843a7c0f51ff1249867">&#9670;&#160;</a></span>RO_</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t RO_ = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>R0_ resistencia R0 a aire en condiciones normales. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00060">60</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a87eea1f191ed5296a34f753085bb5dbe" name="a87eea1f191ed5296a34f753085bb5dbe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a87eea1f191ed5296a34f753085bb5dbe">&#9670;&#160;</a></span>stop</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">char stop[] = {255, 1, 1, 1, 2, 0, 0, 0}</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>stop es una lista de comando "parar" para la aplicacion Dabble </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00083">83</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00170">read_data()</a>.</p>
+
+</div>
+</div>
+<a id="a1fcdb8ca24c526a411a722da9e119ec5" name="a1fcdb8ca24c526a411a722da9e119ec5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fcdb8ca24c526a411a722da9e119ec5">&#9670;&#160;</a></span>task_handle1</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t task_handle1 = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00092">92</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a> y <a class="el" href="_proyecto_integrador_8c_source.html#l00098">funcTimer()</a>.</p>
+
+</div>
+</div>
+<a id="a2310c66f510ad4d0c05f78f4d3101f28" name="a2310c66f510ad4d0c05f78f4d3101f28"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2310c66f510ad4d0c05f78f4d3101f28">&#9670;&#160;</a></span>task_handle2</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TaskHandle_t task_handle2 = <a class="el" href="ili9341_8c.html#a070d2ce7b6bb7e5c05602aa8c308d0c4">NULL</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00093">93</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+<p class="reference">Referenciado por <a class="el" href="_proyecto_integrador_8c_source.html#l00233">app_main()</a>.</p>
+
+</div>
+</div>
+<a id="a5a9a16e4ca89b9281d994f3113b39965" name="a5a9a16e4ca89b9281d994f3113b39965"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a9a16e4ca89b9281d994f3113b39965">&#9670;&#160;</a></span>valor_convertido</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">volatile uint16_t valor_convertido = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>valorGasLPG valor de gas butano convertido a entero. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00066">66</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+</div>
+</div>
+<a id="a1f2a605a098616ceac20dc28295538a1" name="a1f2a605a098616ceac20dc28295538a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1f2a605a098616ceac20dc28295538a1">&#9670;&#160;</a></span>valorGasLPG</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">float valorGasLPG = 0</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>valorGasLPG valor de gas butano medido. </p>
+
+<p class="definition">Definición en la línea <a class="el" href="_proyecto_integrador_8c_source.html#l00063">63</a> del archivo <a class="el" href="_proyecto_integrador_8c_source.html">ProyectoIntegrador.c</a>.</p>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_fa9eeebcaa8158f4b54a0dec25ea9fd1.html">Gabirondo-1C-2024</a></li><li class="navelem"><a class="el" href="dir_a1f2c2e8392fcc397c90153dbf3f0fd4.html">firmware</a></li><li class="navelem"><a class="el" href="dir_3b573e072e1fe1c529443652dd324020.html">projects</a></li><li class="navelem"><a class="el" href="dir_dea910927e81456c562f1f5ae72e1c7f.html">ProyectoIntegrador</a></li><li class="navelem"><a class="el" href="dir_58e9c97a02f1174006982d53b107db81.html">main</a></li><li class="navelem"><a class="el" href="_proyecto_integrador_8c.html">ProyectoIntegrador.c</a></li>
+    <li class="footer">Generado por <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.10.0 </li>
+  </ul>
+</div>
+</body>
+</html>

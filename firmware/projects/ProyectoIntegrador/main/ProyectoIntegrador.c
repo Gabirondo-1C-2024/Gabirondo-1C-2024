@@ -2,7 +2,9 @@
  *
  * @section genDesc General Description
  *
- * This section describes how the program works.
+ * Se implementa un robot móvil capaz de detectar gases peligrosos e inflamables, que al detectar el gas
+ * se enciende una alarama. El robot se controla por Bluetooth mediante una aplicacion de smartphene,
+ * el cual tiene las funcines de atras, adelante, derecha e izquierda.
  *
  * <a href="https://drive.google.com/...">Operation Example</a>
  *
@@ -17,9 +19,9 @@
  *
  * |   Date	    | Description                                    |
  * |:----------:|:-----------------------------------------------|
- * | 12/09/2023 | Document creation		                         |
+ * | 19/06/2024 | Fecha de entrega		                         |
  *
- * @author Albano Peñalva (albano.penalva@uner.edu.ar)
+ * @author Valentina Gabirondo (valentina.gabirondo@ingenieria.uner.edu.ar)
  *
  */
 
@@ -44,38 +46,63 @@
 #include "pwm_mcu.h"
 
 /*==================[macros and definitions]=================================*/
-#define TIME_PERIOD 500000 // tiempo de sensado micro
-#define BUZZER GPIO_3
+#define TIME_PERIOD 500000 // tiempo en us
 
-uint16_t RO_ = 0;                       //!< resistencia R0 a aire en condiciones normales.
-float valorGasLPG = 0;                  //!< valor de gas butano medido.
-volatile uint16_t valor_convertido = 0; //!< valor de gas butano convertido a entero.
-bool estadoMedicion = true;             //!< condicion de medicion.
-uint16_t promedio;
+/** @brief GPIO_3 lo utilizo para el buzzer .*/
+#define BUZZER GPIO_3
 
 #define AIA GPIO_22
 #define AIB GPIO_19
 #define BIB GPIO_21
 #define BIA GPIO_20
 
-uint16_t valor_gas;
+/** @brief R0_ resistencia R0 a aire en condiciones normales.*/
+uint16_t RO_ = 0;
+
+/** @brief valorGasLPG valor de gas butano medido.*/
+float valorGasLPG = 0;
+
+/** @brief valorGasLPG valor de gas butano convertido a entero.*/
+volatile uint16_t valor_convertido = 0;
+
+/** @brief estadoMedicion bandera condicion de medicion.*/
+bool estadoMedicion = true; 
+
+/** @brief promedio es una variable uint16_t que guarda el promedio de 5 valores de gas.*/
+uint16_t promedio;
 
 /*==================[internal data definition]===============================*/
+
+/** @brief adelante es una lista de comando "adelante" para la aplicacion Dabble*/
 char adelante[] = {255, 1, 1, 1, 2, 0, 1, 0};
+
+/** @brief atras es una lista de comando "atras" para la aplicacion Dabble*/
 char atras[] = {255, 1, 1, 1, 2, 0, 2, 0};
+
+/** @brief stop es una lista de comando "parar" para la aplicacion Dabble*/
 char stop[] = {255, 1, 1, 1, 2, 0, 0, 0};
+
+/** @brief derecha es una lista de comando "doblar a la derecha" para la aplicacion Dabble*/
 char derecha[] = {255, 1, 1, 1, 2, 0, 8, 0};
+
+/** @brief izquierda es una lista de comando "doblar a la izquierda" para la aplicacion Dabble*/
 char izquierda[] = {255, 1, 1, 1, 2, 0, 4, 0};
 
 /*==================[internal functions declaration]=========================*/
 TaskHandle_t task_handle1 = NULL;
 TaskHandle_t task_handle2 = NULL;
+
+/**
+ * @brief Función invocada en la interrupción del timer
+ */
 void funcTimer(void *param)
 {
     vTaskNotifyGiveFromISR(task_handle1, pdFALSE);
 }
 
-// Esta tarea lee el valor de gas
+/** @fn static void tarea_leer_gas(void *pvParameter)
+ * @brief Esta tarea lee el valor del gas, lo convierte a ppm y realiza un promedio con 5 muestras cada 0.5 s usando timer.
+ */
 static void tarea_leer_gas(void *pvParameter)
 {
     uint16_t vect[5];
@@ -108,7 +135,9 @@ static void tarea_leer_gas(void *pvParameter)
     }
 }
 
-// Lee la se;al de gas y encinde la alamra cunado el el nivel de gas pasaun umbral preestablecido
+/** @fn static void Alarma_ON(void *pvParameter)
+ * @brief Tarea encargada de encender una alarma cuando el valor del gas supera el umbral preestablecido cada 0.5 s usando delay.
+ */
 void Alarma_ON(void *pvParameter)
 {
 
@@ -118,7 +147,7 @@ void Alarma_ON(void *pvParameter)
 
     while (1)
     {
-        printf("%d\n", promedio);
+        // printf("%d\n", promedio);
         if (promedio > umbral)
         {
             BuzzerOn();
@@ -134,8 +163,11 @@ void Alarma_ON(void *pvParameter)
 }
 
 /*==================[external functions definition]==========================*/
-
-void read_data(uint8_t *data, uint8_t length)
+/** @fn void read_data(uint8_t *data)
+ * @brief Funcion que utilizo para controlar los motores con PWM y GPIO.
+ * @param data uint8_t variable que guarda los caracteres que le mando por bluetooth.
+ */
+void read_data(uint8_t *data)
 {
 
     if (data[0] == adelante[0] && data[1] == adelante[1] && data[2] == adelante[2] && data[3] == adelante[3] && data[4] == adelante[4] && data[5] == adelante[5] && data[6] == adelante[6] && data[7] == adelante[7])
@@ -165,7 +197,7 @@ void read_data(uint8_t *data, uint8_t length)
 
         PWMSetDutyCycle(PWM_0, 0);
         PWMSetDutyCycle(PWM_1, 0);
-        
+
         PWMOn(PWM_1);
         PWMOn(PWM_0);
 
@@ -234,8 +266,8 @@ void app_main(void)
 
     TimerInit(&timer_1);
 
-    xTaskCreate(&tarea_leer_gas, "lee la senial de gas", 4069, NULL, 5, &task_handle1);
-    xTaskCreate(&Alarma_ON, "hace sonar una alrma", 4069, NULL, 5, &task_handle2);
+    xTaskCreate(&tarea_leer_gas, "lee la senial de gas y hace un promedio", 4069, NULL, 5, &task_handle1);
+    xTaskCreate(&Alarma_ON, "hace sonar una alarma cuando suena un umbral", 4069, NULL, 5, &task_handle2);
 
     TimerStart(timer_1.timer);
 }
