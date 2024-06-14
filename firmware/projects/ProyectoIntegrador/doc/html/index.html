@@ -104,15 +104,20 @@ $(function(){initNavTree('index.html',''); initResizable(); });
 <div class="contents">
 <div class="textblock"><h1><a class="anchor" id="genDesc"></a>
 General Description</h1>
-<p>Se implementa un robot móvil capaz de detectar gases peligrosos e inflamables, que al detectar el gas se enciende una alarama. El robot se controla por Bluetooth mediante una aplicacion de smartphene, el cual tiene las funcines de atras, adelante, derecha e izquierda.</p>
-<p><a href="https://drive.google.com/...">Operation Example</a></p>
+<p>Se implementa un robot móvil capaz de detectar gases peligrosos e inflamables, que al detectar el gas se enciende una alarama. El robot se controla por Bluetooth mediante una aplicacion de smartphone, el cual tiene las funciones de atras, adelante, derecha e izquierda.</p>
 <h1><a class="anchor" id="hardConn"></a>
 Hardware Connection</h1>
 <table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadCenter">Peripheral   </th><th class="markdownTableHeadLeft">ESP32    </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyCenter">PIN_X   </td><td class="markdownTableBodyLeft">GPIO_X   </td></tr>
+<td class="markdownTableBodyCenter">AIA   </td><td class="markdownTableBodyLeft">GPIO_22    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">AIB   </td><td class="markdownTableBodyLeft">GPIO_19    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">BIB   </td><td class="markdownTableBodyLeft">GPIO_21    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter">BIA   </td><td class="markdownTableBodyLeft">GPIO_20   </td></tr>
 </table>
 <h1><a class="anchor" id="changelog"></a>
 Changelog</h1>

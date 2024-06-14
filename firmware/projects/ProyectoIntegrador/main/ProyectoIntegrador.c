@@ -3,18 +3,20 @@
  * @section genDesc General Description
  *
  * Se implementa un robot móvil capaz de detectar gases peligrosos e inflamables, que al detectar el gas
- * se enciende una alarama. El robot se controla por Bluetooth mediante una aplicacion de smartphene,
- * el cual tiene las funcines de atras, adelante, derecha e izquierda.
- *
- * <a href="https://drive.google.com/...">Operation Example</a>
+ * se enciende una alarama. El robot se controla por Bluetooth mediante una aplicacion de smartphone,
+ * el cual tiene las funciones de atras, adelante, derecha e izquierda.
  *
  * @section hardConn Hardware Connection
  *
  * |    Peripheral  |   ESP32   	|
  * |:--------------:|:--------------|
- * | 	PIN_X	 	| 	GPIO_X		|
+ * | 	AIA	 	    | 	GPIO_22		|
+ * | 	AIB	 	    | 	GPIO_19		|
+ * | 	BIB	 	    | 	GPIO_21		|
+ * | 	BIA	 	    | 	GPIO_20		|
+ * 
  *
- *
+ * 
  * @section changelog Changelog
  *
  * |   Date	    | Description                                    |
